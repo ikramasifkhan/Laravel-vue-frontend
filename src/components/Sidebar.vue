@@ -11,7 +11,8 @@
             </div>
             <ul class="app-menu">
                 <li><router-link class="app-menu__item active" :to="{ name: 'home'}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></router-link></li>
-                <li><router-link class="app-menu__item" :to="{name:'category'}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Categories</span></router-link></li>
+                <li><router-link class="app-menu__item active" :to="{ name: 'company-list'}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Company</span></router-link></li>
+                <li><router-link class="app-menu__item active" :to="{ name: 'user-list'}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">User</span></router-link></li>
             </ul>
         </aside>
     </div>

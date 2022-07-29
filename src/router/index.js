@@ -11,25 +11,45 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/categories',
-    name: 'category',
+    path: '/companies',
+    name: 'company-list',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/Category/CategoryListView.vue')
+      return import(/* webpackChunkName: "about" */ '../views/Company/CompanyList.vue')
     }
   },
   {
-    path: '/categories/add',
-    name: 'category-add',
+    path: '/company-add',
+    name: 'add-company',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/Category/AddCategoryView.vue')
+      return import(/* webpackChunkName: "about" */ '../views/Company/CreateCompany.vue')
     }
-  }
+  },
+  {
+    path: '/users',
+    name: 'user-list',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: function () {
+      return import(/* webpackChunkName: "about" */ '../views/User/UserList.vue')
+    }
+  },
+  {
+    path: '/users/add',
+    name: 'add-user',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: function () {
+      return import(/* webpackChunkName: "about" */ '../views/User/AddUser.vue')
+    }
+  },
 ]
 
 const router = new VueRouter({
