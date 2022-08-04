@@ -41,6 +41,7 @@
                                             <span v-else class="badge badge-pill badge-danger">Inactive</span>
                                         </td>
                                         <td>
+                                            <router-link class="btn btn-sm btn-warning mr-1" :to="{name: 'edit-user', params: { userId: `${user.id}` }}" title="Edit Now" @click="deleteUser(user.id)"><i class="fa fa-pencil-square-o mr-0 text-white"></i></router-link>
                                             <button class="btn btn-sm btn-danger" title="Delete Now" @click="deleteUser(user.id)"><i class="fa fa-trash-o mr-0"></i></button>
                                         </td>
                                     </tr>
@@ -57,7 +58,6 @@
 
 <script>
     import {mapState, mapGetters, mapActions} from 'vuex'
-    import vueToast from 'vue-toastr'
     import axios from 'axios'
     export default {
         name: "UserList",
@@ -77,7 +77,6 @@
                 axios.delete(`http://127.0.0.1:8000/api/v1/users/${userId}`)
                 .then(({data})=>{
                     this.getUsers()
-                    vueToast.info("Hai hello")
                 })
                 .catch()
             }

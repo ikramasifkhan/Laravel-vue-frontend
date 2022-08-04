@@ -7,7 +7,7 @@
                 </div>
                 <ul class="app-breadcrumb breadcrumb">
                     <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                    <li class="breadcrumb-item"><a href="#">Company</a></li>
+                    <li class="breadcrumb-item"><a href="#" class="disabled">Company</a></li>
                 </ul>
             </div>
             <div class="row">
@@ -23,35 +23,28 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Mobile</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
+                                    <tr v-for="(company, index) in companyList" :key="company.id">
+                                        <td>{{++index}}</td>
+                                        <td>{{company.name}}</td>
+                                        <td>{{company.email}}</td>
+                                        <td>{{company.mobile}}</td>
+                                        <td>
+                                            <span class="badge badge-primary" v-if="company.status === `active`">Active</span>
+                                            <span class="badge badge-danger" v-else>Inactive</span>
+                                        </td>
+                                        <td>
+                                            <router-link :to="{name: 'company-details', params: { companyId: company.id }}" class="btn btn-sm btn-info mr-1" title="View Details"><i class="fa fa-eye mr-0"></i></router-link>
+                                            <router-link :to="{name: 'company-edit', params: { companyId: company.id }}" class="btn btn-sm btn-warning mr-1" title="Edit Now"><i class="fa fa-pencil-square-o mr-0 text-white"></i></router-link>
+                                            <button class="btn btn-sm btn-danger" title="Delete Now" type="button" @click="deleteCompany(company.id)"><i class="fa fa-trash-o mr-0 text-white" aria-hidden="true"></i></button>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -65,8 +58,33 @@
 </template>
 
 <script>
+    import {mapState, mapGetters, mapActions} from 'vuex'
+    import axios from 'axios'
     export default {
-        name: "CompanyList"
+        name: "CompanyList",
+        computed:{
+            ...mapGetters('company', [
+                "companyList"
+            ])
+        },
+        mounted() {
+            return this.getCompanyList()
+        },
+        methods:{
+            ...mapActions('company', [
+                "getCompanyList"
+            ]),
+
+            deleteCompany(companyId){
+                axios.delete(`http://127.0.0.1:8000/api/v1/companies/${companyId}`)
+                .then(({data})=>{
+                    this.getCompanyList()
+                })
+                .catch((error)=>{
+                    console.log(error)
+                })
+            }
+        }
     }
 </script>
 

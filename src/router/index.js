@@ -21,6 +21,16 @@ const routes = [
     }
   },
   {
+    path: '/company/:companyId',
+    name: 'company-details',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: function () {
+      return import(/* webpackChunkName: "about" */ '../views/Company/Details.vue')
+    }
+  },
+  {
     path: '/company-add',
     name: 'add-company',
     // route level code-splitting
@@ -28,6 +38,16 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: function () {
       return import(/* webpackChunkName: "about" */ '../views/Company/CreateCompany.vue')
+    }
+  },
+  {
+    path: '/company/edit/:companyId',
+    name: 'company-edit',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: function () {
+      return import(/* webpackChunkName: "about" */ '../views/Company/Edit.vue')
     }
   },
   {
@@ -48,6 +68,16 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: function () {
       return import(/* webpackChunkName: "about" */ '../views/User/AddUser.vue')
+    }
+  },
+  {
+    path: '/users/edit/:userId',
+    name: 'edit-user',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: function () {
+      return import(/* webpackChunkName: "about" */ '../views/User/EditUser.vue')
     }
   },
 ]
